@@ -1,0 +1,16 @@
+
+srp check: maven (java-maven)
+
+  PASS  recovery.yaml present  [15]
+  PASS  RECOVERY.md present  [10]
+  PASS  schema_version declared  [5]
+  PASS  toolchain versions pinned (exact, no ranges or TODO)  [15]
+  PASS  build steps declared  [15]
+  PASS  dependencies or build tool pinned (lockfile or wrapper)  [15]
+  PASS  environment variables documented (names only)  [10]
+  FAIL  build and release owners named  [5]
+  PASS  no .env file in repo root  [10]
+
+  Readiness score: 95/100 (minimum 70)
+  Self-assessed. This is not a Castler verification.
+

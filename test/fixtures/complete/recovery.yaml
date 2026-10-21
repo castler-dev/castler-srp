@@ -1,0 +1,23 @@
+schema_version: "0.1"
+
+component:
+  name: "complete-app"
+  ecosystem: "node"
+
+build:
+  toolchain:
+    node: "20.11.1"
+  install: "npm ci"
+  steps:
+    - "npm run build"
+
+runtime:
+  start: "npm start"
+  env_vars:   # names only, never values
+    - name: DATABASE_URL
+    - name: PORT
+  services: []
+
+owners:
+  build: "Platform team"
+  release: "Release manager"

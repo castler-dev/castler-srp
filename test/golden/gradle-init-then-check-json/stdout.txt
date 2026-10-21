@@ -1,0 +1,55 @@
+{
+  "tool": "castler-srp",
+  "version": "0.2.0",
+  "score": 80,
+  "min": 70,
+  "pass": true,
+  "ecosystem": "java-gradle",
+  "rules": [
+    {
+      "rule": "recovery.yaml present",
+      "weight": 15,
+      "pass": true
+    },
+    {
+      "rule": "RECOVERY.md present",
+      "weight": 10,
+      "pass": true
+    },
+    {
+      "rule": "schema_version declared",
+      "weight": 5,
+      "pass": true
+    },
+    {
+      "rule": "toolchain versions pinned (exact, no ranges or TODO)",
+      "weight": 15,
+      "pass": false
+    },
+    {
+      "rule": "build steps declared",
+      "weight": 15,
+      "pass": true
+    },
+    {
+      "rule": "dependencies or build tool pinned (lockfile or wrapper)",
+      "weight": 15,
+      "pass": true
+    },
+    {
+      "rule": "environment variables documented (names only)",
+      "weight": 10,
+      "pass": true
+    },
+    {
+      "rule": "build and release owners named",
+      "weight": 5,
+      "pass": false
+    },
+    {
+      "rule": "no .env file in repo root",
+      "weight": 10,
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+services:
+  db:
+    image: "postgres:16.2"
+  cache:
+    image: redis
+  queue:
+    image: docker.io/library/rabbitmq:3.13-management
+  other-db:
+    image: postgres:15
+  web:
+    image: nginx:1.25

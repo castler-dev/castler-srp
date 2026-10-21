@@ -2,8 +2,12 @@
   "name": "castler-srp",
   "version": "0.2.0",
   "description": "Software recoverability readiness check by Castler. Drafts recovery.yaml and scores how rebuildable your repo is.",
-  "bin": { "srp": "index.js" },
-  "files": ["index.js", "README.md", "LICENSE"],
+  "bin": { "srp": "bin/srp.js" },
+  "files": ["bin/", "src/", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "node --test test/golden.test.js test/engine.test.js test/package.test.js"
+  },
+  "dependencies": { "yaml": "2.9.1" },
   "engines": { "node": ">=18" },
   "license": "Apache-2.0",
   "author": "Castler",

@@ -1,0 +1,33 @@
+schema_version: "0.1"
+
+component:
+  name: "basic-api"
+  ecosystem: "node"
+
+build:
+  toolchain:
+    node: "20.11.1"
+  install: "npm ci"
+  steps:
+    - "npm run build"
+
+runtime:
+  start: "npm start"
+  env_vars:   # names only, never values
+    - name: DATABASE_URL
+    - name: REDIS_URL
+    - name: PORT
+  services:
+    - type: postgres
+      version: "16.2"
+      confidence: inferred
+    - type: redis
+      version: "TODO"
+      confidence: inferred
+    - type: rabbitmq
+      version: "3.13-management"
+      confidence: inferred
+
+owners:
+  build: "TODO"
+  release: "TODO"

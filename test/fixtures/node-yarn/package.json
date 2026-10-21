@@ -1,0 +1,1 @@
+{ "name": "yarn-web", "engines": { "node": "^20.0.0" }, "scripts": { "start": "node index.js" } }

@@ -1,0 +1,11 @@
+[
+  { "id": "recovery-yaml-present", "weight": 15, "message": "recovery.yaml present" },
+  { "id": "recovery-md-present", "weight": 10, "message": "RECOVERY.md present" },
+  { "id": "schema-version-declared", "weight": 5, "message": "schema_version declared" },
+  { "id": "toolchain-pinned", "weight": 15, "message": "toolchain versions pinned (exact, no ranges or TODO)" },
+  { "id": "build-steps-declared", "weight": 15, "message": "build steps declared" },
+  { "id": "dependencies-pinned", "weight": 15, "message": "dependencies or build tool pinned (lockfile or wrapper)" },
+  { "id": "env-vars-documented", "weight": 10, "message": "environment variables documented (names only)" },
+  { "id": "owners-named", "weight": 5, "message": "build and release owners named" },
+  { "id": "no-dotenv-file", "weight": 10, "message": "no .env file in repo root" }
+]

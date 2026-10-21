@@ -1,0 +1,28 @@
+schema_version: "0.1"
+
+component:
+  name: "maven"
+  ecosystem: "java-maven"
+
+build:
+  toolchain:
+    java: "17"
+  install: "./mvnw -B dependency:go-offline"
+  steps:
+    - "./mvnw -B package -DskipTests"
+
+runtime:
+  start: "TODO"
+  env_vars:   # names only, never values
+    - name: SPRING_DATASOURCE_URL
+  services:
+    - type: mysql
+      version: "8.0"
+      confidence: inferred
+    - type: elasticsearch
+      version: "8.12.0"
+      confidence: inferred
+
+owners:
+  build: "TODO"
+  release: "TODO"

@@ -1,0 +1,23 @@
+schema_version: "0.1"
+
+component:
+  name: "yarn-web"
+  ecosystem: "node"
+
+build:
+  toolchain:
+    node: "^20.0.0"
+  install: "yarn install --frozen-lockfile"
+  steps:
+    - "TODO"
+
+runtime:
+  start: "npm start"
+  env_vars:   # names only, never values
+    - name: API_KEY
+    - name: LOG_LEVEL
+  services: []
+
+owners:
+  build: "TODO"
+  release: "TODO"

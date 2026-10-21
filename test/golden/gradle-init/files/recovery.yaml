@@ -1,0 +1,21 @@
+schema_version: "0.1"
+
+component:
+  name: "gradle"
+  ecosystem: "java-gradle"
+
+build:
+  toolchain:
+    java: "TODO"
+  install: "TODO"
+  steps:
+    - "./gradlew build -x test"
+
+runtime:
+  start: "TODO"
+  env_vars: []   # names only, never values
+  services: []
+
+owners:
+  build: "TODO"
+  release: "TODO"

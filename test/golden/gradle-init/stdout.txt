@@ -1,0 +1,2 @@
+Created recovery.yaml and RECOVERY.md.
+Fill in every "TODO", then run: srp check

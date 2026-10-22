@@ -104,6 +104,13 @@ test('owners: TODO values fail, named values pass, a TODO comment is ignored', (
   assert.strictEqual(score('owners: {}\n').pass['owners-named'], false);
 });
 
+test('owners: listed without a name fails', () => {
+  assert.strictEqual(score('owners:\n  build:\n  release:\n').pass['owners-named'], false);
+  assert.strictEqual(score('owners:\n  build: Alice\n  release: ""\n').pass['owners-named'], false);
+  assert.strictEqual(score('owners:\n  build: Alice\n  release: { team: x }\n').pass['owners-named'], false);
+  assert.strictEqual(score('owners:\n  build: Alice\n  release: Bob\n').pass['owners-named'], true);
+});
+
 test('schema_version must be a top-level key', () => {
   assert.strictEqual(score('schema_version: "0.1"\n').pass['schema-version-declared'], true);
   assert.strictEqual(score('component:\n  schema_version: "0.1"\n').pass['schema-version-declared'], false);

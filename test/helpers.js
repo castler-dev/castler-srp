@@ -14,6 +14,7 @@ const ROOT = path.join(__dirname, '..');
 const FIXTURES = path.join(__dirname, 'fixtures');
 const GOLDEN = path.join(__dirname, 'golden');
 const BIN = path.join(ROOT, 'bin', 'srp.js');
+const FAKE_PLATFORM = path.join(__dirname, 'support', 'fake-platform.js');
 
 const WRITTEN = ['recovery.yaml', 'RECOVERY.md'];
 
@@ -46,6 +47,8 @@ const CASES = [
   { name: 'maven-property-init', fixture: 'maven-property', args: ['init'], files: WRITTEN },
   { name: 'gradle-init', fixture: 'gradle', args: ['init'], files: WRITTEN },
   { name: 'gradle-init-then-check-json', fixture: 'gradle', pre: [['init']], args: ['check', '--json'] },
+  { name: 'maven-init-windows', fixture: 'maven', platform: 'win32', args: ['init'], files: WRITTEN },
+  { name: 'gradle-init-windows', fixture: 'gradle', platform: 'win32', args: ['init'], files: WRITTEN },
 
   { name: 'complete-check', fixture: 'complete', args: ['check'] },
   { name: 'complete-check-json', fixture: 'complete', args: ['check', '--json', '--min', '90'] },
@@ -72,8 +75,10 @@ function toCrlf(dir) {
   }
 }
 
-function runCli(entry, cwd, args) {
-  const r = spawnSync(process.execPath, [entry, ...args], { cwd, encoding: 'utf8' });
+// Cases run as Linux unless they set `platform`, so goldens match on every OS.
+function runCli(entry, cwd, args, platform = 'linux') {
+  const env = { ...process.env, SRP_TEST_PLATFORM: platform };
+  const r = spawnSync(process.execPath, [FAKE_PLATFORM, entry, ...args], { cwd, env, encoding: 'utf8' });
   if (r.error) throw r.error;
   return { stdout: r.stdout, stderr: r.stderr, status: r.status };
 }
@@ -89,10 +94,10 @@ function runCase(c, entry = BIN) {
     // Created at runtime so no .env file is ever committed.
     if (c.dotenv) fs.writeFileSync(path.join(dir, '.env'), 'PLACEHOLDER=1\n');
     for (const p of c.pre || []) {
-      const r = runCli(entry, dir, p);
+      const r = runCli(entry, dir, p, c.platform);
       if (r.status !== 0) throw new Error(`${c.name}: setup "${p.join(' ')}" exited ${r.status}`);
     }
-    const out = runCli(entry, dir, c.args);
+    const out = runCli(entry, dir, c.args, c.platform);
     out.files = {};
     for (const f of c.files || []) out.files[f] = fs.readFileSync(path.join(dir, f), 'utf8');
     return out;

@@ -5,7 +5,7 @@
   "bin": { "srp": "bin/srp.js" },
   "files": ["bin/", "src/", "README.md", "LICENSE"],
   "scripts": {
-    "test": "node --test test/golden.test.js test/engine.test.js test/package.test.js"
+    "test": "node --test test/golden.test.js test/engine.test.js test/detect.test.js test/package.test.js"
   },
   "dependencies": { "yaml": "2.9.1" },
   "engines": { "node": ">=18" },

@@ -37,10 +37,12 @@ const EVALUATORS = {
     return facts.envVars.every((n) => names.includes(n));
   },
 
+  // Every owner listed must have a non-empty name; "build:" with no value fails.
   'owners-named': ({ recovery }) => {
     const owners = recovery.doc.owners;
-    return !!owners && typeof owners === 'object' && Object.keys(owners).length > 0 &&
-      !/TODO/.test(JSON.stringify(owners));
+    if (!owners || typeof owners !== 'object') return false;
+    const names = Object.values(owners);
+    return names.length > 0 && names.every((v) => !isMap(v) && !Array.isArray(v) && scalar(v) !== '' && !/TODO/.test(scalar(v)));
   },
 
   'no-dotenv-file': ({ repo }) => !repo.has('.env'),
